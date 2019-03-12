@@ -11,6 +11,18 @@ import SDWebImage
 
 class StatisticVC: UIViewController {
     
+    var arrUsersWhoLike = [User]()
+    var arrCommentators = [User]()
+    var arrMentions = [User]()
+    var arrReposters = [User]()
+    var viewsCount = ""
+    var likesCount = ""
+    var commentatorsCount = ""
+    var mentionsCount = ""
+    var repostersCount = ""
+    var bookmarkCount = ""
+    var idForRequest = ""
+    
     @IBOutlet weak var statTableView: UITableView!
     
     override func viewDidLoad() {
@@ -18,20 +30,19 @@ class StatisticVC: UIViewController {
         
         statTableView.estimatedRowHeight = 44
         statTableView.rowHeight = UITableView.automaticDimension
+        
     }
-
+    
 }
 
 extension StatisticVC: UITableViewDataSource {
-
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCellWithCollection", for: indexPath) as! TableViewCell
         
         cell.layer.cornerRadius = 8
@@ -50,7 +61,7 @@ extension StatisticVC: UITableViewDataSource {
         }
         if indexPath.row == 1 {
             if arrUsersWhoLike.count != 0 {
-               cell.iconForCellImageView.image = UIImage(named: "like")
+                cell.iconForCellImageView.image = UIImage(named: "like")
                 cell.titleForCellLabel.text = "Лайки " + likesCount
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
@@ -111,10 +122,7 @@ extension StatisticVC: UITableViewDataSource {
         }
         return cell
     }
-    
-    
-    }
-
+}
 
 extension StatisticVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -155,7 +163,6 @@ extension StatisticVC: UICollectionViewDataSource {
         }
         return cell
     }
-    
     
 }
 
