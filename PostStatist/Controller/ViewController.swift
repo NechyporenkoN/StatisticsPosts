@@ -30,12 +30,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requestOnIdPost(slug: slugTextField.text!)
+        
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "statisticVC") {
+//        if (segue.identifier == "statisticVC") {
             let vc = segue.destination as? StatisticVC
             vc?.arrUsersWhoLike = arrUsersWhoLike
             vc?.arrCommentators = arrCommentators
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
             vc?.mentionsCount = mentionsCount
             vc?.repostersCount = repostersCount
             vc?.bookmarkCount = bookmarkCount
-        }
+//        }
     }
     
     //get those who made repost
@@ -154,11 +154,13 @@ class ViewController: UIViewController {
                         let userWhoLike = User.init(imageUrl: urlImage, name: nickname)
                         self.arrUsersWhoLike.append(userWhoLike)
                     }
+                    self.performSegue(withIdentifier: "statisticVC", sender: self)
                 }
                 else {
                     debugPrint("HTTP Request Log in failed: \(String(describing: response.result.error))")
                 }
         }
+        
     }
     
     //get the basic data of the post
@@ -192,7 +194,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func statisticsButton(_ sender: Any) {
-        
+        requestOnIdPost(slug: slugTextField.text!)
     }
 }
 
